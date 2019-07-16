@@ -1,0 +1,225 @@
+ \documentclass[a4paper,9pt]{beamer}
+ 
+ \mode<presentation>
+{
+  \usetheme{Singapore}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{} % or try albatross, beaver, crane, ...
+  %\usefonttheme{serif}  % or try serif, structurebold, ...
+  \mode<presentation>{\useinnertheme{rounded}}
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+  \addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    %\insertfrawas done by one doctor menumber/\inserttotalframenumber
+}
+} 
+
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{color, colortbl}
+\usepackage{subfig}
+\usepackage{listings}
+%\usepackage[style=authoryear]{biblatex}
+%\usepackage[latin1]{inputenc}
+\usefonttheme{professionalfonts}
+\usepackage{times}
+%\usepackage{tikz}
+%\usetikzlibrary{arrows,shapes}
+%\usepackage[colorlinks,citecolor=red,linkcolor=black]{hyperref}
+\usepackage[super,comma,sort&compress]{natbib}
+   \bibliographystyle{apalike}
+    \usepackage{float}
+    %\usepackage[utf8]{inputenc}
+    %\usepackage[style=numeric]{biblatex}
+    \usepackage[english]{babel}
+    \usepackage{multicol}
+    %\usepackage{dirtytalk}
+%\usepackage{fancyhdr}
+
+\title{Measuring intraspecific diversity: a critical assessment of methods}
+
+\author{Olusoji O. D.$^{1, 2}$, Spaak J.$^{1}$, Neyens T.$^{2}$, Fontana S.$^{3}$, \\Aerts M.$^{2}$, De Laender F.$^{1}$}
+\institute{Environmental and Evolutionary Biology (URBE), Univeriste De Namur, Belgium$^{1}$, \\Center for Statistics, Universiteit Hasselt, Belgium$^{2}$, \\Swiss Federal Institute for Forest, Snow and Landscape Research, Birmensdorf, Switzerland$^{3}$}\\
+
+ %\textcolor{red}{ESAUSSE, LOUISVILLE 2019}
+\titlegraphic{\includegraphics[width=3.5cm,height=1.0cm,scale=0.7]{Ibiostat_logo.png} ~% 
+\hspace*{0.75cm} \includegraphics[width=2cm,height=1.5cm,scale=0.7]{ilee.JPG}
+\hspace*{0.75cm} \includegraphics[width=1.5cm,height=1.4cm,scale=0.1]{Unamur_logo.jpg}
+  }
+
+\date{August 13, 2019}
+
+\beamertemplatenavigationsymbolsempty
+
+%\setbeamerfont{page number in head/foot}{size=\large}
+\setbeamertemplate{footline}[frame number]
+
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+%\SweaveOpts{concordance=TRUE}
+
+\frame{\maketitle}
+
+\section{Intraspecific Diversity (ITD)}
+
+\begin{frame}{Intraspecific Diversity, what is it?}
+
+\begin{columns}
+
+\begin{column}{0.5\textwidth}
+\begin{block}{ITD Definition}
+\begin{tikzpicture}
+\draw (0,0) circle (3pt);
+\end{tikzpicture} $-$ Species one, \begin{tikzpicture}
+\draw (0,0) rectangle ++(4pt,4pt);
+\end{tikzpicture} $-$ Species two
+\vspace{-0.6cm}
+<<r intra, echo=FALSE, fig.align='left', fig.width=5, fig.height=5>>=
+#library(emo)
+library(mvtnorm)
+#species one
+x1 <- rmvnorm(25, mean = c(5, 5), sigma = diag(0.5, nrow = 2, ncol = 2))
+#species two
+x2 <- rmvnorm(25, mean = c(5.5, 8.5), sigma = diag(0.75, nrow = 2, ncol = 2))
+plot(x1, type = "n", xaxt = "n", yaxt = "n", bty = "l", xlab = "", ylab = "", 
+     ylim = c(min(x1[,2], x2[,2]), max(x1[,2], x2[,2])), 
+     xlim = c(min(x1[,1], x2[,1]), max(x1[,1], x2[,1]))
+     )
+axis(side = 1, labels = F, col.ticks = NA)
+axis(side = 2, labels = F, col.ticks = NA)
+mtext("Trait 1", side = 1, line = 0)
+mtext("Trait 2", side = 2, line = 0)
+#random sampling for coloring
+s1 <- sample(x = 1:25, size = 25/2)
+s2 <- setdiff(1:25, s1)
+#species one
+points(x1[s1, ], pch = 21, col = "whitesmoke", bg = "purple3", cex = 1.7)
+points(x1[s2, ], pch = 21, col = "whitesmoke", bg = "red3", cex = 1.7)
+points(x1[which(x1[, 1] >= mean(x1[, 1])), ], pch = 21, col = "whitesmoke", bg = "purple3", cex = 1.7)
+points(x1[which(x1[, 2] == min(x1[, 2])), ], pch = 22, col = "whitesmoke", bg = "purple3", cex = 1.7)
+#species two
+points(x2[s1, ], pch = 22, col = "whitesmoke", bg = "purple3", cex = 1.7)
+points(x2[s2, ], pch = 22, col = "whitesmoke", bg = "red3", cex = 1.7)
+@
+\end{block}
+
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\uncover<2->{\begin{block}{Facets of Intraspecific Diversity}
+
+\begin{itemize}
+\item Richness(what amount of the trait space is occupied by individuals of the same species?)
+\item Evenness(how is the trait space filled up by these individuals?)
+\item Divergence(any form of trait differentiation across these individuals?)
+\end{itemize}
+
+\end{block}
+}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{How is Intraspecific Diversity Measured?}
+
+\begin{itemize}
+\item Via indices!
+\item We concentrate on \alert{multi-trait indices}
+\end{itemize}
+
+\begin{columns}
+\begin{column}{0.33\textwidth}
+
+\begin{block}{Trait Richness}
+\begin{itemize}
+\item FRic (Villeger et al., 2008)
+\item TOP (Fontana et al., 2016)
+\end{itemize}
+\end{block}
+
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\begin{block}{Trait Evenness}
+\begin{itemize}
+\item FEve (Villeger et al., 2008)
+\item TED (Fontana et al., 2016)
+\end{itemize}
+\end{block}
+
+
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\begin{block}{Trait Divergence}
+\begin{itemize}
+\item Rao (Rao, 1982)
+\item FDis (Lalibert \& Legendre, 2010)
+\end{itemize}
+\end{block}
+
+
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Something New?}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{Modified TED (TEDM)}
+
+\end{block}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{block}{Modified TOP (TOPM)}
+
+\end{block}
+
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\section{ITD Criteria}
+
+\begin{frame}{What to Expect from ITD Indices?}
+Simone's criteria and our proposed additional criteria
+
+\end{frame}
+
+
+\section{Simulation and Results}
+
+\begin{frame}{Simulation Framework}
+
+
+\end{frame}
+
+\begin{frame}{Results}
+
+
+\end{frame}
+
+\section{Take Away}
+
+\begin{frame}{Conclusion}
+
+
+\end{frame}
+
+
+
+\end{document}

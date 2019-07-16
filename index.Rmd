@@ -1,0 +1,155 @@
+---
+title: "Measuring intraspecific diversity: a critical assessment of methods"
+author: "Olusoji O.D.$^{1,2}$, Spaak J.$^{1}$, Neyens T.$^{2}$, Fontana S.$^{3}$, <br> Aerts M.$^{2}$, De Laender F.$^{1}$"
+institute: "Environmental and Evolutionary Biology (URBE), Univeriste De Namur, Belgium$^{1}$, <br> Center for Statistics, Universiteit Hasselt, Belgium$^{2}$, <br> Swiss Federal Institute for Forest, Snow and Landscape Research, Birmensdorf, Switzerland$^{3}$"
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["default", "rladies", "rladies-fonts", "cols.css"]
+    lib_dir: libs
+    seal: false
+    nature:
+      beforeInit: "cols_macro.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE,	
+                      warning = FALSE)
+options(htmltools.dir.version = FALSE)
+
+```
+
+background-image: url(pics/esalogo.png)
+background-position: 4% 2%
+background-size: 250px
+
+class: inverse, right
+
+## Measuring intraspecific diversity: <br> a critical assessment of methods
+
+#### Oluosji O.D. $^{1,2}$, Spaak J. $^1$, Neyens T. $^2$, Fontana S. $^3$, <br> Aerts M. $^2$, De Laender F. $^1$
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+Environmental and Evolutionary Biology (URBE), Univeriste De Namur $^1$, <br> Center for Statistics, Universiteit Hasselt  $^2$, <br> Swiss Federal Institute for Forest, Snow and Landscape Research, Birmensdorf $^3$
+
+<br>
+<br>
+
+<div style="text-align: center">
+<img style="float: center; margin: 0px 15px 15px 0px;" src="pics/unamurlogo.png" width="63" /> <pr            >
+ <img style="float: center; margin: 0px 15px 15px 0px;" src="pics/ILEE_transp.png" width="90" height="80"/>  <pr                 >
+ <img style="float: center; margin: 0px 15px 15px 0px;" src="pics/IBiostat-logo.png" width="160" height="70"/>
+</div>
+
+---
+
+# Intraspecific Diversity (ITD)
+
+.pull-left[
+
+## Intraspecific Diversity, what is it? `r emo::ji("roll_eyes")`
+
+* `r emo::ji("cow")` - Species One, `r emo::ji("camel")` - Species Two
+
+```{r, fig.asp=0.93}
+library(emojifont)
+library(mvtnorm)
+set.seed(3435)
+#species one
+x1 <- rmvnorm(25, mean = c(5, 5), sigma = diag(0.5, nrow = 2, ncol = 2))
+#species two
+x2 <- rmvnorm(25, mean = c(5.5, 8.5), sigma = diag(0.75, nrow = 2, ncol = 2))
+plot(x1, type = "n", xaxt = "n", yaxt = "n", bty = "l", xlab = "", ylab = "", 
+     ylim = c(min(x1[,2], x2[,2]), max(x1[,2], x2[,2])), 
+     xlim = c(min(x1[,1], x2[,1]), max(x1[,1], x2[,1]))
+     )
+axis(side = 1, labels = F, col.ticks = NA)
+axis(side = 2, labels = F, col.ticks = NA)
+mtext("Trait 1", side = 1, line = 0)
+mtext("Trait 2", side = 2, line = 0)
+#random sampling for coloring
+s1 <- sample(x = 1:25, size = 25/2)
+s2 <- setdiff(1:25, s1)
+#species one
+#text(x1[s1, ], pch = 21, col = "purple3", cex = 1.7, labels = emoji('cow'))
+#text(x1[s2, ], pch = 21, col = "red3", cex = 2.0, labels = emoji('cow'))
+text(x1[which(x1[, 1] >= mean(x1[, 1])), ], col = "gray0", cex = 1.7, labels = emoji('cow'))
+text(x1[which(x1[, 1] < mean(x1[, 1])), ], col = "darkgrey", cex = 1.7, labels = emoji('cow'))
+#text(x1[which(x1[, 2] == min(x1[, 2])), ], pch = 22, col = "whitesmoke", bg = "purple3", cex = 1.7)
+#species two
+text(x2[s1, ], col = "chocolate2", cex = 1.7, labels = emoji('camel'))
+text(x2[s2, ], col = "chocolate4", cex = 1.7, labels = emoji('camel'))
+```
+
+]
+
+--
+
+.pull-right[
+
+## Importance & Facets of ITD
+
+* **pivotal role in ecosystem mechanisms and dynamics** (De Laender et al., 2014)
+
+* `Richness` (what amount of the trait space is occupied by individuals of this species?) 
+
+* `Evenness` (how is the trait space filled up by these individuals?) 
+
+* `Divergence` (any form of trait differentiation across these individuals?)
+
+]
+
+---
+
+# How is ITD Measured?
+
+--
+
+* via indices `r emo::ji('smile')`
+
+* we concentrate on some popular `multi-trait` indices.
+
+--
+
+![:col_header Trait Richness, Trait Evenness, Trait Divergence]
+![:col_list `FRic` (Villeger et al. 2008), `FEve` (Villeger et al. 2008), `Rao` (Rao 1982)]
+![:col_list `TOP` (Fontana et al. 2016), `TED` (Fontana et al. 2016), `FDis`  (Lalibert & Legendre 2010)]
+
+--
+
+### Something New?
+
+.pull-left[
+
+
+]
+
+.pull-right[
+
+
+]
+
+
+---
+
+# What Should be Expected of ITD Indices? `r emo::ji("thinking")`
+
+* Matematically acceptable
+
+* Conforms with intuition
+
+* Measure pure ITD
+![Pure ITD](pics/Sample_Size_Influence.PNG)
+
+
+
+

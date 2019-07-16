@@ -1,0 +1,5 @@
+\babel@toc {english}{}
+\beamer@sectionintoc {1}{Intraspecific Diversity (ITD)}{2}{0}{1}
+\beamer@sectionintoc {2}{ITD Criteria}{6}{0}{2}
+\beamer@sectionintoc {3}{Simulation and Results}{7}{0}{3}
+\beamer@sectionintoc {4}{Take Away}{9}{0}{4}

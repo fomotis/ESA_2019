@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Measuring intraspecific diversity: a critical assessment of methods</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Olusoji O.D.^{1,2}, Spaak J.^{1}, Neyens T.^{2}, Fontana S.^{3},   Aerts M.^{2}, De Laender F.^{1}" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="cols.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+background-image: url(pics/esalogo.png)
+background-position: 4% 2%
+background-size: 250px
+
+class: inverse, right
+
+## Measuring intraspecific diversity: &lt;br&gt; a critical assessment of methods
+
+#### Oluosji O.D. `\(^{1,2}\)`, Spaak J. `\(^1\)`, Neyens T. `\(^2\)`, Fontana S. `\(^3\)`, &lt;br&gt; Aerts M. `\(^2\)`, De Laender F. `\(^1\)`
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+Environmental and Evolutionary Biology (URBE), Univeriste De Namur `\(^1\)`, &lt;br&gt; Center for Statistics, Universiteit Hasselt  `\(^2\)`, &lt;br&gt; Swiss Federal Institute for Forest, Snow and Landscape Research, Birmensdorf `\(^3\)`
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;div style="text-align: center"&gt;
+&lt;img style="float: center; margin: 0px 15px 15px 0px;" src="pics/unamurlogo.png" width="63" /&gt; &lt;pr            &gt;
+ &lt;img style="float: center; margin: 0px 15px 15px 0px;" src="pics/ILEE_transp.png" width="90" height="80"/&gt;  &lt;pr                 &gt;
+ &lt;img style="float: center; margin: 0px 15px 15px 0px;" src="pics/IBiostat-logo.png" width="160" height="70"/&gt;
+&lt;/div&gt;
+
+---
+
+# Intraspecific Diversity (ITD)
+
+.pull-left[
+
+## Intraspecific Diversity, what is it? 🙄
+
+* 🐮 - Species One, 🐫 - Species Two
+
+![](index_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
+]
+
+--
+
+.pull-right[
+
+## Importance &amp; Facets of ITD
+
+* **pivotal role in ecosystem mechanisms and dynamics** (De Laender et al., 2014)
+
+* `Richness` (what amount of the trait space is occupied by individuals of this species?) 
+
+* `Evenness` (how is the trait space filled up by these individuals?) 
+
+* `Divergence` (any form of trait differentiation across these individuals?)
+
+]
+
+---
+
+# How is ITD Measured?
+
+--
+
+* via indices 😄
+
+* we concentrate on some popular `multi-trait` indices.
+
+--
+
+![:col_header Trait Richness, Trait Evenness, Trait Divergence]
+![:col_list `FRic` (Villeger et al. 2008), `FEve` (Villeger et al. 2008), `Rao` (Rao 1982)]
+![:col_list `TOP` (Fontana et al. 2016), `TED` (Fontana et al. 2016), `FDis`  (Lalibert &amp; Legendre 2010)]
+
+--
+
+### Something New?
+
+.pull-left[
+
+
+]
+
+.pull-right[
+
+
+]
+
+
+---
+
+# What Should be Expected of ITD Indices? 🤔
+
+* Matematically acceptable
+
+* conform with intuition
+
+* Measure pure ITD
+![Pure ITD](pics/Sample_Size_Influence.PNG)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="cols_macro.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
