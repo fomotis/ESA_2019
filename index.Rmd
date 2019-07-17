@@ -141,14 +141,67 @@ text(x2[s2, ], col = "chocolate4", cex = 1.7, labels = emoji('camel'))
 
 ---
 
-# What Should be Expected of ITD Indices? `r emo::ji("thinking")`
+# What Should be Expected of ITD Indices? `r emo::ji("roll_eyes")`
 
-* Matematically acceptable
+--
 
-* Conforms with intuition
+* Mathematically acceptable and embodies the logic of its creation `r emo::ji("thumbs_up")`
 
-* Measure pure ITD
+--
+
+* Conforms with established intuition `r emo::ji("thumbs_up")`
+
+--
+
+* **`Measure pure ITD`** `r emo::ji("grimace")` `r emo::ji("question")`
+
+--
 ![Pure ITD](pics/Sample_Size_Influence.PNG)
+
+---
+
+# Simulation Framework
+
+.pull-left[
+
+```{r, fig.asp=0.85}
+library(grid)
+library(png)
+
+img1 <- readPNG("pics/Scenarios_Setup1.PNG")
+grid.raster(img1)
+```
+
+* Across Scenarios; 
+  - $\uparrow$ `Richness`
+  - $\uparrow$ `Divergence`
+  - $\downarrow$ `Eveness`
+
+]
+
+.pull-right[
+
+```{r, fig.asp=0.85}
+library(grid)
+library(png)
+
+img1 <- readPNG("pics/Scenarios_Setup2.PNG")
+grid.raster(img1)
+```
+
+* Across Scenarios; 
+  - $\downarrow$ `Richness`
+  - $\uparrow$ `Divergence`
+  - $\downarrow$ `Eveness` `r emo::ji("grimace")`
+
+]
+
+---
+
+# Simulation Framework (Cont:)
+
+
+
 
 
 
