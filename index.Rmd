@@ -20,7 +20,14 @@ knitr::opts_chunk$set(echo = FALSE,
                       message = FALSE,	
                       warning = FALSE)
 options(htmltools.dir.version = FALSE)
-
+library(emojifont)
+library(mvtnorm)
+library(tidyverse)
+library(grid)
+library(png)
+library(gridExtra)
+library(ggpubr)
+library(gganimate)
 ```
 
 background-image: url(pics/esalogo.png)
@@ -61,8 +68,6 @@ Environmental and Evolutionary Biology (URBE), Univeriste De Namur $^1$, <br> Ce
 * `r emo::ji("cow")` - Species One, `r emo::ji("camel")` - Species Two
 
 ```{r, fig.asp=0.93}
-library(emojifont)
-library(mvtnorm)
 set.seed(3435)
 #species one
 x1 <- rmvnorm(25, mean = c(5, 5), sigma = diag(0.5, nrow = 2, ncol = 2))
@@ -112,9 +117,7 @@ text(x2[s2, ], col = "chocolate4", cex = 1.7, labels = emoji('camel'))
 
 # How is ITD Measured?
 
---
-
-* via indices `r emo::ji('smile')`
+* You guessed right! It is done via indices `r emo::ji('smile')`
 
 * we concentrate on some popular `multi-trait` indices.
 
@@ -145,15 +148,15 @@ text(x2[s2, ], col = "chocolate4", cex = 1.7, labels = emoji('camel'))
 
 --
 
-* Mathematically acceptable and embodies the logic of its creation `r emo::ji("thumbs_up")`
+1. Mathematically acceptable and embodies the logic of its creation `r emo::ji("thumbs_up")`
 
 --
 
-* Conforms with established intuition `r emo::ji("thumbs_up")`
+2. Conforms with established intuition `r emo::ji("thumbs_up")`
 
 --
 
-* **`Measure pure ITD`** `r emo::ji("grimace")` `r emo::ji("question")`
+3. **`Measure pure ITD`** `r emo::ji("grimace")` `r emo::ji("question")`
 
 --
 ![Pure ITD](pics/Sample_Size_Influence.PNG)
@@ -164,10 +167,9 @@ text(x2[s2, ], col = "chocolate4", cex = 1.7, labels = emoji('camel'))
 
 .pull-left[
 
-```{r, fig.asp=0.85}
-library(grid)
-library(png)
+### Case 1
 
+```{r, fig.asp=0.80}
 img1 <- readPNG("pics/Scenarios_Setup1.PNG")
 grid.raster(img1)
 ```
@@ -181,12 +183,11 @@ grid.raster(img1)
 
 .pull-right[
 
-```{r, fig.asp=0.85}
-library(grid)
-library(png)
+### Case 2
 
-img1 <- readPNG("pics/Scenarios_Setup2.PNG")
-grid.raster(img1)
+```{r, fig.asp=0.80}
+img2 <- readPNG("pics/Scenarios_Setup22.PNG")
+grid.raster(img2)
 ```
 
 * Across Scenarios; 
@@ -198,10 +199,100 @@ grid.raster(img1)
 
 ---
 
-# Simulation Framework (Cont:)
+# Simulation Framework (Special Cases)
+
+.pull-left[
+### Case 3(TED, TEDM)
+
+```{r, fig.asp=0.80}
+img3 <- readPNG("pics/Scenario2_Uniform.PNG")
+grid.raster(img3)
+```
+
+- $\downarrow$ `Eveness` `r emo::ji("smile")`
+]
+
+.pull-right[
+### Case 4(TOP, TOPM)
+
+```{r, fig.asp=0.80}
+x1 <- rep(1:5,each=5)
+x2 <- rep(1:5,times=5)
+X <- cbind(x1,x2)
+
+#par(mfrow = c(1,2))
+plot(X, pch = 19, col = 2, xlab = "Trait 1", ylab = "Trait 2", bty = "l")
+points(X[13, 1], X[13, 2], col = "blue", pch = 19)
+
+arrows(x0 = 3, y0 = 3, x1 = 4.5, y1 = 4.5, 
+       angle = 45, length = 0.30, lty = 2, lwd = 2.5, col = 6)
+```
+
+- `Richness` `r emo::ji("man_shrugging")`
+]
+
+---
+
+# Results
+
+.pull-left[
+
+### Case 1
+
+```{r, cache=TRUE}
+load("Data/TwoDimensionSimulationResults.RData")
+
+Comm_every <- tibble(mu_change = delta_mu, Sim_Results = Results_comm) %>%
+  mutate(
+        Average = lapply(Sim_Results, function(x) {
+                            apply(x, 2, mean)
+                                                   }), 
+        se_results = lapply(Sim_Results, function(x) apply(x, 2, sd)) )
+
+Averages <- as.data.frame(Comm_every$Average %>% do.call(rbind, .)) %>% 
+  mutate(mu_change = delta_mu) %>% gather(key = "Variable", value = "Average", - mu_change)
+
+sds <- as.data.frame(Comm_every$se_results %>% do.call(rbind, .)) %>% 
+  mutate(mu_change = delta_mu) %>% gather(key = "Variable", value = "SE", - mu_change)
+
+Comm1_results <- merge(Averages, sds, by = c("mu_change", "Variable"), sort = F)
+names(Comm1_results)[2] <- "Indices"
+
+Comm1_results$Index_Type[Comm1_results$Indices %in% c("FRIC", "TOP", "TOPM")] <- "Richness"
+Comm1_results$Index_Type[Comm1_results$Indices %in% c("FEVE", "TED", "TEDM")] <- "Evenness"
+Comm1_results$Index_Type[Comm1_results$Indices %in% c("RAO", "FDIS")] <- "Divergence"
+
+#rescaling to 0-1 range
+Comm1_results <- Comm1_results %>% group_by(Indices) %>% 
+  mutate(Average2 = Average/max(Average), SE2 = SE / max(SE) )
+
+Comm1_results$Indices <- factor(Comm1_results$Indices, 
+                                levels = c("FDIS", "RAO", 
+                                           "FRIC", "TOP", "TOPM",
+                                           "FEVE", "TED", "TEDM"))
+  
+Comm1_results  %>% ggplot(aes(x = mu_change, y = Average2, group = Indices, col = Indices)) + 
+  geom_point(size = 4)  + 
+  geom_line(size = 2) + 
+  theme_bw() + 
+  facet_wrap(~Index_Type) +
+  color_palette("Dark2") + 
+  scale_x_continuous(breaks = seq(0, 10, by = 2))  + 
+  scale_y_continuous(breaks = seq(0, 1, by = 0.15)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.9, vjust = 0.5), legend.position = "bottom") +
+  #geom_text(aes(x = 10.1, label = Indices)) +
+  coord_cartesian(clip = 'off') +
+  labs(x = "Location Shift", y = "Rescaled Index Value") + 
+  transition_reveal(mu_change)
+```
+]
 
 
+.pull-right[
+### Case 2
 
+
+]
 
 
 
