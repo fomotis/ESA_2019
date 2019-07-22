@@ -48,7 +48,7 @@ Environmental and Evolutionary Biology (URBE), Univeriste De Namur `\(^1\)`, &lt
 
 .pull-left[
 
-## Intraspecific Diversity, what is it? 🙄
+## Intraspecific Diversity, what is it?
 
 * 🐮 - Species One, 🐫 - Species Two
 
@@ -78,8 +78,6 @@ Environmental and Evolutionary Biology (URBE), Univeriste De Namur `\(^1\)`, &lt
 
 * You guessed right! It is done via indices 😄
 
-* we concentrate on some popular `multi-trait` indices.
-
 --
 
 ![:col_header Trait Richness, Trait Evenness, Trait Divergence]
@@ -88,22 +86,24 @@ Environmental and Evolutionary Biology (URBE), Univeriste De Namur `\(^1\)`, &lt
 
 --
 
-### Something New?
+### TOPM &amp; TEDM
 
 .pull-left[
 
+![](index_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
 
+![](index_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
 
 ]
 
 
 ---
 
-# What Should be Expected of ITD Indices? 🙄
+# What Should be Expected of ITD Indices?
 
 --
 
@@ -115,7 +115,7 @@ Environmental and Evolutionary Biology (URBE), Univeriste De Namur `\(^1\)`, &lt
 
 --
 
-3. **`Measure pure ITD`** 😬 ❓
+3. **`Measures pure ITD`** 😬 ❓
 
 --
 ![Pure ITD](pics/Sample_Size_Influence.PNG)
@@ -128,7 +128,7 @@ Environmental and Evolutionary Biology (URBE), Univeriste De Namur `\(^1\)`, &lt
 
 ### Case 1
 
-![](index_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
 
 * Across Scenarios; 
   - `\(\uparrow\)` `Richness`
@@ -141,7 +141,7 @@ Environmental and Evolutionary Biology (URBE), Univeriste De Namur `\(^1\)`, &lt
 
 ### Case 2
 
-![](index_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 
 * Across Scenarios; 
   - `\(\downarrow\)` `Richness`
@@ -152,20 +152,23 @@ Environmental and Evolutionary Biology (URBE), Univeriste De Namur `\(^1\)`, &lt
 
 ---
 
-# Simulation Framework (Special Cases)
+# Simulation Framework (Cont.)
+
+- `Case 3` `\(-\)` Add more and more individuals to the trait space
+  * `\(\rightarrow\)` `Richness`, `Divergence`, `Eveness`
 
 .pull-left[
-### Case 3(TED, TEDM)
+### Case 4(TED, TEDM)
 
-![](index_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
 - `\(\downarrow\)` `Eveness` 😄
 ]
 
 .pull-right[
-### Case 4(TOP, TOPM)
+### Case 5(TOP, TOPM)
 
-![](index_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-7-1.gif)&lt;!-- --&gt;
 
 - `Richness` 🤷‍♂
 ]
@@ -178,15 +181,150 @@ Environmental and Evolutionary Biology (URBE), Univeriste De Namur `\(^1\)`, &lt
 
 ### Case 1
 
-![](index_files/figure-html/unnamed-chunk-6-1.gif)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-8-1.gif)&lt;!-- --&gt;
+
+* `FEVE` 👎
 ]
 
 
 .pull-right[
 ### Case 2
 
+![](index_files/figure-html/unnamed-chunk-9-1.gif)&lt;!-- --&gt;
+
+* `FRIC, TOPM` 👎
+]
+
+---
+
+# Results (Cont:)
+
+.pull-left[
+
+### Case 3
+
+![](index_files/figure-html/unnamed-chunk-10-1.gif)&lt;!-- --&gt;
+
+* `RAO`, `FDIS` 👍
+]
+
+.pull-right[
+
+### Case 4
+
+![](index_files/figure-html/unnamed-chunk-11-1.gif)&lt;!-- --&gt;
+&lt;br&gt;
+&lt;br&gt;
+* `FEve` 👎
 
 ]
+
+---
+
+# Results (Cont:)
+
+### Case 5
+
+.pull-left[
+
+![](index_files/figure-html/unnamed-chunk-12-1.gif)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+![](index_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+]
+
+* mathematical discontinuity 😑
+
+---
+
+# Conclusions
+
+* `Finally`, let us put it altogether;
+--
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Facet &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Index &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Criterion.1 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Criterion.2 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Criterion.3 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Richness &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; FRic &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👎 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👎 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; TOP &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👎 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👎 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; TOPM &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👎 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👎 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👎 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Evenness &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; FEve &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👎 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 😬 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; TED &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👎 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 😬 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; TEDM &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 😬 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Divergence &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Rao &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; FDis &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 👍 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+class: center
+
+# Thanks
+      
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+## Many thanks to you for coming 😄
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
